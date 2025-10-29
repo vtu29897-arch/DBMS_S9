@@ -1,0 +1,219 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Mon Sep 22 14:19:29 2025
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: VTU29897
+Enter password:
+Connected.
+SQL> select t.Teamid,t.boardid,t.name,p.fname from team t join player p on t.Teamid=p.Teamid where p.playerid='p';
+select t.Teamid,t.boardid,t.name,p.fname from team t join player p on t.Teamid=p.Teamid where p.playerid='p'
+                *
+ERROR at line 1:
+ORA-00904: "T"."BOARDID": invalid identifier
+
+
+SQL> select t.Teamid,t.Boardid,t.name,p.fname from team t join player p on t.Teamid=p.Teamid where p.playerid='p';
+select t.Teamid,t.Boardid,t.name,p.fname from team t join player p on t.Teamid=p.Teamid where p.playerid='p'
+                *
+ERROR at line 1:
+ORA-00904: "T"."BOARDID": invalid identifier
+
+
+SQL> select t.Teamid,t.name,p.fname from team t join player p on t.Teamid=p.Teamid where p.playerid='p';
+
+no rows selected
+
+SQL> select*from Team natural join cricketboard;
+
+no rows selected
+
+SQL> select * from Team natural join cricketboard;
+
+no rows selected
+
+SQL> select * from Match natural join Team;
+
+no rows selected
+
+SQL> select * from Match  join Team;
+select * from Match  join Team
+                             *
+ERROR at line 1:
+ORA-00905: missing keyword
+
+
+SQL> select * from Match JOINTeam;
+
+MATCHID    RESULT                    GROUNDID   TEAMID
+---------- ------------------------- ---------- ----------
+M01        A won                     G01
+M02        Draw                      G02
+M03        B won                     G03
+
+SQL> select * from Team JOIN cricketboard;
+select * from Team JOIN cricketboard
+                                   *
+ERROR at line 1:
+ORA-00905: missing keyword
+
+
+SQL> select * from Team JOIN Cricketboard;
+select * from Team JOIN Cricketboard
+                                   *
+ERROR at line 1:
+ORA-00905: missing keyword
+
+
+SQL> select * from Team JOINCricketboard;
+
+TEAMID                    NAME
+------------------------- -------------------------
+COACH
+--------------------------------------------------
+CAPTAIN
+--------------------------------------------------
+t1                        India
+Rahul Dravid
+Rohit Sharma
+
+t2                        England
+Matthew Mott
+Jos Buttler
+
+TEAMID                    NAME
+------------------------- -------------------------
+COACH
+--------------------------------------------------
+CAPTAIN
+--------------------------------------------------
+
+t3                        Australia
+Andrew McDonald
+Pat Cummins
+
+
+SQL> select Teamid,teamname from Team leftjoin player where Teamname='titans';
+select Teamid,teamname from Team leftjoin player where Teamname='titans'
+                                          *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select Teamid,teamname from Team LEFTJOIN player where Teamname='titans';
+select Teamid,teamname from Team LEFTJOIN player where Teamname='titans'
+                                          *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select Teamid,teamname from Team LEFTJOIN Player where Teamname='titans';
+select Teamid,teamname from Team LEFTJOIN Player where Teamname='titans'
+                                          *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select playerid,playername from Player where player name='Dhoni';
+select playerid,playername from Player where player name='Dhoni'
+                                                    *
+ERROR at line 1:
+ORA-00920: invalid relational operator
+
+
+SQL> select playerid,playername from Player where playername='Dhoni';
+select playerid,playername from Player where playername='Dhoni'
+                                             *
+ERROR at line 1:
+ORA-00904: "PLAYERNAME": invalid identifier
+
+
+SQL> select playerid,playername from Player where playername='Dhoni';
+select playerid,playername from Player where playername='Dhoni'
+                                             *
+ERROR at line 1:
+ORA-00904: "PLAYERNAME": invalid identifier
+
+
+SQL> select*from Team NATURALJOIN cricketboard;
+select*from Team NATURALJOIN cricketboard
+                             *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select*from Team NATURAL JOIN cricketboard;
+
+no rows selected
+
+SQL> select * from Team NATURAL JOIN cricketboard;
+
+no rows selected
+
+SQL> select * from Team NATURAL JOIN Cricketboard;
+
+no rows selected
+
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL> select Matchid from Match RIGHTJOIN player on match.matchid=player.playerid;
+select Matchid from Match RIGHTJOIN player on match.matchid=player.playerid
+                                    *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select Matchid from Match RIGHTJOIN Player on match.matchid=player.playerid;
+select Matchid from Match RIGHTJOIN Player on match.matchid=player.playerid
+                                    *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select Matchid from Match RIGHTJOIN Player ON match.matchid=player.playerid;
+select Matchid from Match RIGHTJOIN Player ON match.matchid=player.playerid
+                                    *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
