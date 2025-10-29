@@ -1,0 +1,546 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Mon Sep 8 14:26:22 2025
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: VTU29897
+Enter password:
+Connected.
+SQL> select * from cricketboard;
+
+BOARDID
+----------
+NAME
+--------------------------------------------------------------------------------
+ADRESS                    CONTACT_NO
+------------------------- ----------
+b1
+BCCI
+Mumbai                    9876543210
+
+b2
+ECB
+London                    9123456780
+
+BOARDID
+----------
+NAME
+--------------------------------------------------------------------------------
+ADRESS                    CONTACT_NO
+------------------------- ----------
+
+b3
+CA
+Australia                 9988776655
+
+
+SQL> select * from Team;
+
+TEAMID                    NAME
+------------------------- -------------------------
+COACH
+--------------------------------------------------
+CAPTAIN
+--------------------------------------------------
+t1                        India
+Rahul Dravid
+Rohit Sharma
+
+t2                        England
+Matthew Mott
+Jos Buttler
+
+TEAMID                    NAME
+------------------------- -------------------------
+COACH
+--------------------------------------------------
+CAPTAIN
+--------------------------------------------------
+
+t3                        Australia
+Andrew McDonald
+Pat Cummins
+
+
+SQL>  insert into player values('&Playerid','&FName','&LName','&Age','&DateofBirth','&Playingrole','&Teamid');
+Enter value for playerid: P01
+Enter value for fname: MS
+Enter value for lname: Dhoni
+Enter value for age: 42
+Enter value for dateofbirth: 07-07-1981
+Enter value for playingrole: Wicket Keeper Batsman
+Enter value for teamid: T01
+old   1:  insert into player values('&Playerid','&FName','&LName','&Age','&DateofBirth','&Playingrole','&Teamid')
+new   1:  insert into player values('P01','MS','Dhoni','42','07-07-1981','Wicket Keeper Batsman','T01')
+ insert into player values('P01','MS','Dhoni','42','07-07-1981','Wicket Keeper Batsman','T01')
+                                                   *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+SQL>  insert into player values('&Playerid','&FName','&LName','&Age','&DateofBirth','&Playingrole','&Teamid');
+Enter value for playerid: P01
+Enter value for fname: MS
+Enter value for lname: Dhoni
+Enter value for age: 42
+Enter value for dateofbirth: 1981-07-07
+Enter value for playingrole: Wicket Keeper Batsman
+Enter value for teamid: T01
+old   1:  insert into player values('&Playerid','&FName','&LName','&Age','&DateofBirth','&Playingrole','&Teamid')
+new   1:  insert into player values('P01','MS','Dhoni','42','1981-07-07','Wicket Keeper Batsman','T01')
+ insert into player values('P01','MS','Dhoni','42','1981-07-07','Wicket Keeper Batsman','T01')
+                                                   *
+ERROR at line 1:
+ORA-01861: literal does not match format string
+
+
+SQL>  insert into player values('&Playerid','&FName','&LName','&Age','&DateofBirth','&Playingrole','&Teamid');
+Enter value for playerid: 07-07-1981
+Enter value for fname:
+Enter value for lname:
+Enter value for age:
+Enter value for dateofbirth:
+Enter value for playingrole:
+Enter value for teamid:
+old   1:  insert into player values('&Playerid','&FName','&LName','&Age','&DateofBirth','&Playingrole','&Teamid')
+new   1:  insert into player values('07-07-1981','','','','','','')
+ insert into player values('07-07-1981','','','','','','')
+                                        *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("VTU29897"."PLAYER"."FNAME")
+
+
+SQL>  insert into player values('&Playerid','&FName','&LName','&Age',TO_DATE('&dob','DD_MM_YYYY'),'&Playingrole','&Teamid');
+Enter value for playerid: P01
+Enter value for fname: MS
+Enter value for lname: Dhoni
+Enter value for age: 42
+Enter value for dob: 07-07-1981
+Enter value for playingrole: Wicket Keeper
+Enter value for teamid: t01
+old   1:  insert into player values('&Playerid','&FName','&LName','&Age',TO_DATE('&dob','DD_MM_YYYY'),'&Playingrole','&Teamid')
+new   1:  insert into player values('P01','MS','Dhoni','42',TO_DATE('07-07-1981','DD_MM_YYYY'),'Wicket Keeper ','t01')
+ insert into player values('P01','MS','Dhoni','42',TO_DATE('07-07-1981','DD_MM_YYYY'),'Wicket Keeper ','t01')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (VTU29897.SYS_C007044) violated - parent key
+not found
+
+
+SQL> /
+Enter value for playerid: p01
+Enter value for fname: ms
+Enter value for lname: dHONI
+Enter value for age: 42
+Enter value for dob: 07-07-1981
+Enter value for playingrole: WICKET KEEPER
+Enter value for teamid: t01
+old   1:  insert into player values('&Playerid','&FName','&LName','&Age',TO_DATE('&dob','DD_MM_YYYY'),'&Playingrole','&Teamid')
+new   1:  insert into player values('p01','ms ','dHONI','42',TO_DATE('07-07-1981','DD_MM_YYYY'),'WICKET KEEPER','t01')
+ insert into player values('p01','ms ','dHONI','42',TO_DATE('07-07-1981','DD_MM_YYYY'),'WICKET KEEPER','t01')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (VTU29897.SYS_C007044) violated - parent key
+not found
+
+
+SQL> insert into players values('&playerid','&FNmae','&LName','&Age',TO_DATE('&dob','DD_MM_YYYY'),'&Playingrole','&Teamid'
+  2  );
+Enter value for playerid: P01
+Enter value for fnmae: MS
+Enter value for lname: Dhoni
+Enter value for age: 42
+Enter value for dob: 07-07-1981
+Enter value for playingrole: Wicket Keeper
+Enter value for teamid: T01
+old   1: insert into players values('&playerid','&FNmae','&LName','&Age',TO_DATE('&dob','DD_MM_YYYY'),'&Playingrole','&Teamid'
+new   1: insert into players values('P01','MS','Dhoni','42',TO_DATE('07-07-1981','DD_MM_YYYY'),'Wicket Keeper','T01'
+insert into players values('P01','MS','Dhoni','42',TO_DATE('07-07-1981','DD_MM_YYYY'),'Wicket Keeper','T01'
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> insert into player values('&playerid','&FNmae','&LName','&Age',TO_DATE('&dob','DD_MM_YYYY'),'&Playingrole','&Teamid');
+Enter value for playerid: P01
+Enter value for fnmae: MS
+Enter value for lname: Dhoni
+Enter value for age: 42
+Enter value for dob: 07-07-1981
+Enter value for playingrole: Wicket keeper
+Enter value for teamid: T01
+old   1: insert into player values('&playerid','&FNmae','&LName','&Age',TO_DATE('&dob','DD_MM_YYYY'),'&Playingrole','&Teamid')
+new   1: insert into player values('P01','MS','Dhoni','42',TO_DATE('07-07-1981','DD_MM_YYYY'),'Wicket keeper','T01')
+insert into player values('P01','MS','Dhoni','42',TO_DATE('07-07-1981','DD_MM_YYYY'),'Wicket keeper','T01')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (VTU29897.SYS_C007044) violated - parent key
+not found
+
+
+SQL> insert into player values('&playerid','&FNmae','&LName','&Age','&Playingrole','&Teamid');
+Enter value for playerid: P01
+Enter value for fnmae: MS
+Enter value for lname: Dhoni
+Enter value for age: 42
+Enter value for playingrole: wickwt keeper
+Enter value for teamid: T01
+old   1: insert into player values('&playerid','&FNmae','&LName','&Age','&Playingrole','&Teamid')
+new   1: insert into player values('P01','MS','Dhoni','42','wickwt keeper','T01')
+insert into player values('P01','MS','Dhoni','42','wickwt keeper','T01')
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> insert into player values('&playerid','&FNmae','&LName','&Age',TO_DATE('&DOB','DD-MM-YYYY'),'&Playingrole','&Teamid');
+Enter value for playerid: P01
+Enter value for fnmae: MS
+Enter value for lname: Dhoni
+Enter value for age: 24
+Enter value for dob: 16-09-2001
+Enter value for playingrole: wicket keeper
+Enter value for teamid: T01
+old   1: insert into player values('&playerid','&FNmae','&LName','&Age',TO_DATE('&DOB','DD-MM-YYYY'),'&Playingrole','&Teamid')
+new   1: insert into player values('P01','MS','Dhoni','24',TO_DATE('16-09-2001','DD-MM-YYYY'),'wicket keeper','T01')
+insert into player values('P01','MS','Dhoni','24',TO_DATE('16-09-2001','DD-MM-YYYY'),'wicket keeper','T01')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (VTU29897.SYS_C007044) violated - parent key
+not found
+
+
+SQL> insert into Ground values('&Groundid','&Name','&Location','&Capacity');
+Enter value for groundid: G01
+Enter value for name: Chinnaswamy
+Enter value for location: Bangalore
+Enter value for capacity: 2000
+old   1: insert into Ground values('&Groundid','&Name','&Location','&Capacity')
+new   1: insert into Ground values('G01','Chinnaswamy','Bangalore','2000')
+
+1 row created.
+
+SQL> /
+Enter value for groundid: G02
+Enter value for name: Ahmedabad
+Enter value for location: Gujarat
+Enter value for capacity: 2500
+old   1: insert into Ground values('&Groundid','&Name','&Location','&Capacity')
+new   1: insert into Ground values('G02','Ahmedabad','Gujarat','2500')
+
+1 row created.
+
+SQL> /
+Enter value for groundid: G03
+Enter value for name: Chidambaram
+Enter value for location: Chennai
+Enter value for capacity: 5000
+old   1: insert into Ground values('&Groundid','&Name','&Location','&Capacity')
+new   1: insert into Ground values('G03','Chidambaram','Chennai','5000')
+
+1 row created.
+
+SQL> insert into Match values('&Matchid','&Result','&Groundid');
+Enter value for matchid: M01
+Enter value for result: A won
+Enter value for groundid: G01
+old   1: insert into Match values('&Matchid','&Result','&Groundid')
+new   1: insert into Match values('M01','A won','G01')
+
+1 row created.
+
+SQL> /
+Enter value for matchid: M02
+Enter value for result: Draw
+Enter value for groundid: G02
+old   1: insert into Match values('&Matchid','&Result','&Groundid')
+new   1: insert into Match values('M02','Draw','G02')
+
+1 row created.
+
+SQL> /
+Enter value for matchid: M03
+Enter value for result: B won
+Enter value for groundid: G03
+old   1: insert into Match values('&Matchid','&Result','&Groundid')
+new   1: insert into Match values('M03','B won','G03')
+
+1 row created.
+
+SQL> insert into Umpire values ('&Umpireid','&FName','&LName',TO_DATE('&DOB','DD-MM-YYYY'),'&Country');
+Enter value for umpireid: U01
+Enter value for fname: Kumar
+Enter value for lname: N
+Enter value for dob: 24-04-1971
+Enter value for country: Sri lanka
+old   1: insert into Umpire values ('&Umpireid','&FName','&LName',TO_DATE('&DOB','DD-MM-YYYY'),'&Country')
+new   1: insert into Umpire values ('U01','Kumar','N',TO_DATE('24-04-1971','DD-MM-YYYY'),'Sri lanka')
+insert into Umpire values ('U01','Kumar','N',TO_DATE('24-04-1971','DD-MM-YYYY'),'Sri lanka')
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> insert into Umpire values ('&Umpireid','&FName','&LName','&Age',TO_DATE('&DOB','DD-MM-YYYY'),'&Country');
+Enter value for umpireid: U01
+Enter value for fname: Kumar
+Enter value for lname: N
+Enter value for age: 53
+Enter value for dob: 24-04-1971
+Enter value for country: Srilanka
+old   1: insert into Umpire values ('&Umpireid','&FName','&LName','&Age',TO_DATE('&DOB','DD-MM-YYYY'),'&Country')
+new   1: insert into Umpire values ('U01','Kumar','N','53',TO_DATE('24-04-1971','DD-MM-YYYY'),'Srilanka')
+
+1 row created.
+
+SQL> /
+Enter value for umpireid: U02
+Enter value for fname: Anand
+Enter value for lname: S
+Enter value for age: 40
+Enter value for dob: 02-11-1983
+Enter value for country: India
+old   1: insert into Umpire values ('&Umpireid','&FName','&LName','&Age',TO_DATE('&DOB','DD-MM-YYYY'),'&Country')
+new   1: insert into Umpire values ('U02','Anand','S','40',TO_DATE('02-11-1983','DD-MM-YYYY'),'India')
+
+1 row created.
+
+SQL> /
+Enter value for umpireid: U03
+Enter value for fname: Nithin
+Enter value for lname: M
+Enter value for age: 40
+Enter value for dob: 03-10-1983
+Enter value for country: India
+old   1: insert into Umpire values ('&Umpireid','&FName','&LName','&Age',TO_DATE('&DOB','DD-MM-YYYY'),'&Country')
+new   1: insert into Umpire values ('U03','Nithin','M','40',TO_DATE('03-10-1983','DD-MM-YYYY'),'India')
+
+1 row created.
+
+SQL> insert into player values('&Playerid','&FNmae','&LName','&Age',TO_DATE('&dob','DD-MM-YYYY'),'&Playingrole','&Teamid');
+Enter value for playerid: P01
+Enter value for fnmae: Dhoni
+Enter value for lname: MS
+Enter value for age: 42
+Enter value for dob: 07-07-1981
+Enter value for playingrole: wicket keeper
+Enter value for teamid: T01
+old   1: insert into player values('&Playerid','&FNmae','&LName','&Age',TO_DATE('&dob','DD-MM-YYYY'),'&Playingrole','&Teamid')
+new   1: insert into player values('P01','Dhoni','MS','42',TO_DATE('07-07-1981','DD-MM-YYYY'),'wicket keeper','T01')
+insert into player values('P01','Dhoni','MS','42',TO_DATE('07-07-1981','DD-MM-YYYY'),'wicket keeper','T01')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (VTU29897.SYS_C007044) violated - parent key
+not found
+
+
+SQL> insert into player values('&Playerid','&FNmae','&LName','&Age',TO_DATE('&dob','DD-MM-YYYY'),'&Playingrole');
+Enter value for playerid: P01
+Enter value for fnmae: N
+Enter value for lname: raju
+Enter value for age: 22
+Enter value for dob: 11-02-2004
+Enter value for playingrole: wicket keeper
+old   1: insert into player values('&Playerid','&FNmae','&LName','&Age',TO_DATE('&dob','DD-MM-YYYY'),'&Playingrole')
+new   1: insert into player values('P01','N','raju','22',TO_DATE('11-02-2004','DD-MM-YYYY'),'wicket keeper')
+insert into player values('P01','N','raju','22',TO_DATE('11-02-2004','DD-MM-YYYY'),'wicket keeper')
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL>  insert into player('&Playerid','&FName','&LName','&Age','&DateofBirth','&Playingrole','&Teamid');
+Enter value for playerid: P01
+Enter value for fname: N
+Enter value for lname: Raju
+Enter value for age: 22
+Enter value for dateofbirth: 11-02-2004
+Enter value for playingrole: wicket keeper
+Enter value for teamid: t1
+old   1:  insert into player('&Playerid','&FName','&LName','&Age','&DateofBirth','&Playingrole','&Teamid')
+new   1:  insert into player('P01','N','Raju','22','11-02-2004','wicket keeper','t1')
+ insert into player('P01','N','Raju','22','11-02-2004','wicket keeper','t1')
+                    *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+SQL>  insert into player values('&Playerid','&FName','&LName','&Age','&DateofBirth','&Playingrole','&Teamid');
+Enter value for playerid: P091
+Enter value for fname: N
+Enter value for lname: Raju
+Enter value for age: 22
+Enter value for dateofbirth: 11-02-2004
+Enter value for playingrole: wicket keeper
+Enter value for teamid: t1
+old   1:  insert into player values('&Playerid','&FName','&LName','&Age','&DateofBirth','&Playingrole','&Teamid')
+new   1:  insert into player values('P091','N','Raju','22','11-02-2004','wicket keeper','t1')
+ insert into player values('P091','N','Raju','22','11-02-2004','wicket keeper','t1')
+                                                  *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+SQL>  insert into player values('&Playerid','&FName','&LName','&Age',TO_DATE('dob','DD-MM-YYYY'),'&Playingrole','&Teamid');
+Enter value for playerid: p01
+Enter value for fname: n
+Enter value for lname: rAJU
+Enter value for age: 22
+Enter value for playingrole: 11-02-2004
+Enter value for teamid: T1
+old   1:  insert into player values('&Playerid','&FName','&LName','&Age',TO_DATE('dob','DD-MM-YYYY'),'&Playingrole','&Teamid')
+new   1:  insert into player values('p01','n','rAJU','22',TO_DATE('dob','DD-MM-YYYY'),'11-02-2004','T1')
+ insert into player values('p01','n','rAJU','22',TO_DATE('dob','DD-MM-YYYY'),'11-02-2004','T1')
+                                                         *
+ERROR at line 1:
+ORA-01858: a non-numeric character was found where a numeric was expected
+
+
+SQL>  insert into player values('&Playerid','&FName','&LName','&Age',TO_DATE('dob','DD-MM-YYYY'),'&Playingrole','&Teamid');
+Enter value for playerid: P01
+Enter value for fname: N
+Enter value for lname: Raju
+Enter value for age: 22
+Enter value for playingrole: 11-02-2004
+Enter value for teamid: t1
+old   1:  insert into player values('&Playerid','&FName','&LName','&Age',TO_DATE('dob','DD-MM-YYYY'),'&Playingrole','&Teamid')
+new   1:  insert into player values('P01','N','Raju','22',TO_DATE('dob','DD-MM-YYYY'),'11-02-2004','t1')
+ insert into player values('P01','N','Raju','22',TO_DATE('dob','DD-MM-YYYY'),'11-02-2004','t1')
+                                                         *
+ERROR at line 1:
+ORA-01858: a non-numeric character was found where a numeric was expected
+
+
+SQL>  insert into player values('&Playerid','&FName','&LName','&Age',TO_DATE('&dob','DD-MM-YYYY'),'&Playingrole','&Teamid');
+Enter value for playerid: P01
+Enter value for fname: N
+Enter value for lname: Raju
+Enter value for age: 22
+Enter value for dob: 11-02-2004
+Enter value for playingrole: batsman
+Enter value for teamid: t1
+old   1:  insert into player values('&Playerid','&FName','&LName','&Age',TO_DATE('&dob','DD-MM-YYYY'),'&Playingrole','&Teamid')
+new   1:  insert into player values('P01','N','Raju','22',TO_DATE('11-02-2004','DD-MM-YYYY'),'batsman','t1')
+
+1 row created.
+
+SQL> /
+Enter value for playerid: P02
+Enter value for fname: M
+Enter value for lname: Balu
+Enter value for age: 22
+Enter value for dob: 12-03-2005
+Enter value for playingrole: bowler
+Enter value for teamid: t2
+old   1:  insert into player values('&Playerid','&FName','&LName','&Age',TO_DATE('&dob','DD-MM-YYYY'),'&Playingrole','&Teamid')
+new   1:  insert into player values('P02','M','Balu','22',TO_DATE('12-03-2005','DD-MM-YYYY'),'bowler','t2')
+
+1 row created.
+
+SQL> /
+Enter value for playerid: P03
+Enter value for fname: S
+Enter value for lname: Chandu
+Enter value for age: 24
+Enter value for dob: 13-04-2001
+Enter value for playingrole: wicket keeper
+Enter value for teamid: t3
+old   1:  insert into player values('&Playerid','&FName','&LName','&Age',TO_DATE('&dob','DD-MM-YYYY'),'&Playingrole','&Teamid')
+new   1:  insert into player values('P03','S','Chandu','24',TO_DATE('13-04-2001','DD-MM-YYYY'),'wicket keeper','t3')
+
+1 row created.
+
+SQL> select location from ground where matchid='M01','M02','M03'
+  2  ;
+select location from ground where matchid='M01','M02','M03'
+                                               *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select location from ground where matchid='M01','M02','M03';
+select location from ground where matchid='M01','M02','M03'
+                                               *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select location from ground where matchid=('M01','M02','M03');
+select location from ground where matchid=('M01','M02','M03')
+                                         *
+ERROR at line 1:
+ORA-01797: this operator must be followed by ANY or ALL
+
+
+SQL> select location from ground where matchid ALL('M01','M02','M03');
+select location from ground where matchid ALL('M01','M02','M03')
+                                          *
+ERROR at line 1:
+ORA-00920: invalid relational operator
+
+
+SQL> select location from ground where matchid =('M01','M02','M03');
+select location from ground where matchid =('M01','M02','M03')
+                                          *
+ERROR at line 1:
+ORA-01797: this operator must be followed by ANY or ALL
+
+
+SQL> select location from ground where matchid = ('M01');
+select location from ground where matchid = ('M01')
+                                  *
+ERROR at line 1:
+ORA-00904: "MATCHID": invalid identifier
+
+
+SQL> select location from ground where Matchid = ('M01');
+select location from ground where Matchid = ('M01')
+                                  *
+ERROR at line 1:
+ORA-00904: "MATCHID": invalid identifier
+
+
+SQL> select * from player where FName like 'A';
+
+no rows selected
+
+SQL>
+SQL> alter table player ADD Batting varchar(20);
+
+Table altered.
+
+SQL> alter table player ADD Bowling varchar(10);
+
+Table altered.
+
+SQL> select count(*) from player where Batting = 'right-hand';
+
+  COUNT(*)
+----------
+         0
+
+SQL> select * from cricketboard where Boardid in('B01','B02','B03');
+
+no rows selected
+
+SQL> select Playerid,FName,LName from player where Bowiling = 'left-hand';
+select Playerid,FName,LName from player where Bowiling = 'left-hand'
+                                              *
+ERROR at line 1:
+ORA-00904: "BOWILING": invalid identifier
+
+
+SQL> select Playerid,FName,LName from player where Bowling = 'left-hand';
+
+no rows selected
+
+SQL> select a Umpireid from Umpire where umpireid NOT IN(select Umpireid from Umpire.umpireid);
+select a Umpireid from Umpire where umpireid NOT IN(select Umpireid from Umpire.umpireid)
+       *
+ERROR at line 1:
+ORA-00904: "A": invalid identifier
+
+
+SQL> commit
+  2   insert into player('&Playerid','&FName','&LName','&Age','&DateofBirth','&Playingrole','&Teamid');
