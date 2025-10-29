@@ -1,0 +1,103 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Mon Oct 6 14:17:22 2025
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: VTU29897
+Enter password:
+Connected.
+SQL> create Trigger trg_update_total_matches
+  2  After insert ON match
+  3  for each row
+  4  BEGIN
+  5    UPDATE player
+  6    SET Total matches played=Total matches played+1
+  7    where playerdid=New playerID;
+  8  END;
+  9  /
+create Trigger trg_update_total_matches
+               *
+ERROR at line 1:
+ORA-04081: trigger 'TRG_UPDATE_TOTAL_MATCHES' already exists
+
+
+SQL> create Trigger trg_total_matches
+  2  After insert ON match
+  3  for each row
+  4  BEGIN
+  5    UPDATE player
+  6    SET Total matches played=Total matches played+1
+  7    where playerdid=New playerID;
+  8  END;
+  9  /
+
+Warning: Trigger created with compilation errors.
+
+SQL> create view vw_player_match_details AS
+  2  SELECT
+  3     PLAYER iD,
+  4  /
+   PLAYER iD,
+            *
+ERROR at line 3:
+ORA-00936: missing expression
+
+
+SQL> create view vw_player_match_details AS
+  2  SELECT
+  3     player ID,
+  4     player Name,
+  5     Match_played
+  6     COUNT (m.matchid) AS matches count
+  7  FROM player p
+  8  LEFTJOIN match Team m
+  9  ON p.player ID=m.player ID
+ 10  GROUP BY p.player ID, p.player Name,p.match_played
+ 11  /
+   COUNT (m.matchid) AS matches count
+         *
+ERROR at line 6:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> create view vw_player_match_details AS
+  2  SELECT
+  3     player ID,
+  4     player Name,
+  5     Match_played
+  6     COUNT(m.matchid) AS matches count
+  7  FROM player p
+  8  LEFTJOIN match Team m
+  9  ON p.player ID=m.player ID
+ 10  GROUP BY p.player ID,p.player Name,p.match_played
+ 11  /
+   COUNT(m.matchid) AS matches count
+        *
+ERROR at line 6:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> create VIEW player_match_view AS
+  2  SELECT player_id,player_name,total_matches
+  3  FROM player;
+SELECT player_id,player_name,total_matches
+                             *
+ERROR at line 2:
+ORA-00904: "TOTAL_MATCHES": invalid identifier
+
+
+SQL> create VIEW player_match_view AS
+  2  SELECT player_id,player_name
+  3  FROM player;
+SELECT player_id,player_name
+                 *
+ERROR at line 2:
+ORA-00904: "PLAYER_NAME": invalid identifier
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL>
