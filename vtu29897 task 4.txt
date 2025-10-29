@@ -1,0 +1,377 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Mon Sep 15 14:31:38 2025
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: VTU29897
+Enter password:
+Connected.
+SQL> select * Player;
+select * Player
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select * from Player;
+
+PLAYERID   FNAME
+---------- --------------------------------------------------
+LNAME                                                     AGE DATEOFBIR
+-------------------------------------------------- ---------- ---------
+PLAYINGROLE                                        TEAMID
+-------------------------------------------------- ----------
+BATTING              BOWLING
+-------------------- ----------
+P01        N
+Raju                                                       22 11-FEB-04
+batsman                                            t1
+
+
+
+PLAYERID   FNAME
+---------- --------------------------------------------------
+LNAME                                                     AGE DATEOFBIR
+-------------------------------------------------- ---------- ---------
+PLAYINGROLE                                        TEAMID
+-------------------------------------------------- ----------
+BATTING              BOWLING
+-------------------- ----------
+P02        M
+Balu                                                       22 12-MAR-05
+bowler                                             t2
+
+
+
+PLAYERID   FNAME
+---------- --------------------------------------------------
+LNAME                                                     AGE DATEOFBIR
+-------------------------------------------------- ---------- ---------
+PLAYINGROLE                                        TEAMID
+-------------------------------------------------- ----------
+BATTING              BOWLING
+-------------------- ----------
+P03        S
+Chandu                                                     24 13-APR-01
+wicket keeper                                      t3
+
+
+
+SQL> select * from Match;
+
+MATCHID    RESULT                    GROUNDID
+---------- ------------------------- ----------
+M01        A won                     G01
+M02        Draw                      G02
+M03        B won                     G03
+
+SQL> select * from Umpire;
+
+UMPIREID   FNAME
+---------- --------------------------------------------------
+LNAME                                                     AGE DATEOFBIR
+-------------------------------------------------- ---------- ---------
+COUNTRY
+--------------------------------------------------
+U01        Kumar
+N                                                          53 24-APR-71
+Srilanka
+
+U02        Anand
+S                                                          40 02-NOV-83
+India
+
+UMPIREID   FNAME
+---------- --------------------------------------------------
+LNAME                                                     AGE DATEOFBIR
+-------------------------------------------------- ---------- ---------
+COUNTRY
+--------------------------------------------------
+
+U03        Nithin
+M                                                          40 03-OCT-83
+India
+
+
+SQL> select * from Ground;
+
+GROUNDID
+----------
+NAME
+--------------------------------------------------------------------------------
+LOCATION
+--------------------------------------------------------------------------------
+  CAPACITY
+----------
+G01
+Chinnaswamy
+Bangalore
+      2000
+
+
+GROUNDID
+----------
+NAME
+--------------------------------------------------------------------------------
+LOCATION
+--------------------------------------------------------------------------------
+  CAPACITY
+----------
+G02
+Ahmedabad
+Gujarat
+      2500
+
+
+GROUNDID
+----------
+NAME
+--------------------------------------------------------------------------------
+LOCATION
+--------------------------------------------------------------------------------
+  CAPACITY
+----------
+G03
+Chidambaram
+Chennai
+      5000
+
+
+SQL> select * from Team;
+
+TEAMID                    NAME
+------------------------- -------------------------
+COACH
+--------------------------------------------------
+CAPTAIN
+--------------------------------------------------
+t1                        India
+Rahul Dravid
+Rohit Sharma
+
+t2                        England
+Matthew Mott
+Jos Buttler
+
+TEAMID                    NAME
+------------------------- -------------------------
+COACH
+--------------------------------------------------
+CAPTAIN
+--------------------------------------------------
+
+t3                        Australia
+Andrew McDonald
+Pat Cummins
+
+
+SQL> select* from Cricket;
+select* from Cricket
+             *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select* from Cricketboard;
+
+BOARDID
+----------
+NAME
+--------------------------------------------------------------------------------
+ADRESS                    CONTACT_NO
+------------------------- ----------
+b1
+BCCI
+Mumbai                    9876543210
+
+b2
+ECB
+London                    9123456780
+
+BOARDID
+----------
+NAME
+--------------------------------------------------------------------------------
+ADRESS                    CONTACT_NO
+------------------------- ----------
+
+b3
+CA
+Australia                 9988776655
+
+
+SQL> select Teamid,Name,coach,captain,count(winningmatches) from Team T JOIN Match M on T.Teamid=M.WinningTeamid Group by T.Teamid,T.Name Order BY T.Teamid;
+select Teamid,Name,coach,captain,count(winningmatches) from Team T JOIN Match M on T.Teamid=M.WinningTeamid Group by T.Teamid,T.Name Order BY T.Teamid
+                                                                                            *
+ERROR at line 1:
+ORA-00904: "M"."WINNINGTEAMID": invalid identifier
+
+
+SQL> select Teamid,Name,coach,captain,count(winningmatches) from Team T JOIN Match M on T.Teamid = M.WinningTeamid Group by T.Teamid,T.Name Order BY T.Teamid;
+select Teamid,Name,coach,captain,count(winningmatches) from Team T JOIN Match M on T.Teamid = M.WinningTeamid Group by T.Teamid,T.Name Order BY T.Teamid
+                                                                                              *
+ERROR at line 1:
+ORA-00904: "M"."WINNINGTEAMID": invalid identifier
+
+
+SQL> select Teamid,Name,coach,captain,count(winningmatches) from Team T JOIN Match M on T.Teamid = M.Result Group by T.Teamid,T.Name Order BY T.Teamid;
+select Teamid,Name,coach,captain,count(winningmatches) from Team T JOIN Match M on T.Teamid = M.Result Group by T.Teamid,T.Name Order BY T.Teamid
+                                       *
+ERROR at line 1:
+ORA-00904: "WINNINGMATCHES": invalid identifier
+
+
+SQL> select Teamid,Name,coach,captain,count(Result) from Team T JOIN Match M on T.Teamid = M.Result Group by T.Teamid,T.Name Order BY T.Teamid;
+select Teamid,Name,coach,captain,count(Result) from Team T JOIN Match M on T.Teamid = M.Result Group by T.Teamid,T.Name Order BY T.Teamid
+                   *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression
+
+
+SQL> select Teamid,Name,count(Result) from Team T JOIN Match M on T.Teamid = M.Result Group by T.Teamid,T.Name Order BY T.Teamid;
+
+no rows selected
+
+SQL> select Teamid,Name,count(Result) from Team T LEFTJOIN Match M on T.Teamid = M.Result Group by T.Teamid,T.Name Order BY T.Teamid;
+select Teamid,Name,count(Result) from Team T LEFTJOIN Match M on T.Teamid = M.Result Group by T.Teamid,T.Name Order BY T.Teamid
+                                             *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select Teamid,Name,count(Result) from Team T LEFT JOIN Match M on T.Teamid = M.Result Group by T.Teamid,T.Name Order BY T.Teamid;
+
+TEAMID                    NAME                      COUNT(RESULT)
+------------------------- ------------------------- -------------
+t1                        India                                 0
+t2                        England                               0
+t3                        Australia                             0
+
+SQL> select Teamid,Name,count(tiematches) from Team T LEFT JOIN Match M on T.Teamid = M.tiematches Group by Teamid,Name Order By Teamid;
+select Teamid,Name,count(tiematches) from Team T LEFT JOIN Match M on T.Teamid = M.tiematches Group by Teamid,Name Order By Teamid
+                                                                                 *
+ERROR at line 1:
+ORA-00904: "M"."TIEMATCHES": invalid identifier
+
+
+SQL> select Teamid,Name,count(tiematches) from Team T LEFT JOIN Match M on T.Teamid = M.Matchdi Group by Teamid,Name Order By Teamid;
+select Teamid,Name,count(tiematches) from Team T LEFT JOIN Match M on T.Teamid = M.Matchdi Group by Teamid,Name Order By Teamid
+                                                                                 *
+ERROR at line 1:
+ORA-00904: "M"."MATCHDI": invalid identifier
+
+
+SQL> select Teamid,Name,count(tiematches) from Team T LEFT JOIN Match M on T.Teamid = M.Matchid Group by Teamid,Name Order By Teamid;
+select Teamid,Name,count(tiematches) from Team T LEFT JOIN Match M on T.Teamid = M.Matchid Group by Teamid,Name Order By Teamid
+                         *
+ERROR at line 1:
+ORA-00904: "TIEMATCHES": invalid identifier
+
+
+SQL> select Teamid,Name,count(Result=tiematches) from Team T LEFT JOIN Match M on T.Teamid = M.Matchid Group by Teamid,Name Order By Teamid;
+select Teamid,Name,count(Result=tiematches) from Team T LEFT JOIN Match M on T.Teamid = M.Matchid Group by Teamid,Name Order By Teamid
+                               *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> select Teamid,Name,count(Result=tiematches) from Team T LEFT JOIN Match M on T.Teamid = M.Result=tiematches Group by Teamid,Name Order By Teamid;
+select Teamid,Name,count(Result=tiematches) from Team T LEFT JOIN Match M on T.Teamid = M.Result=tiematches Group by Teamid,Name Order By Teamid
+                               *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL>
+SQL> select Teamid,Name,count(Resulttiematches) from Team T LEFT JOIN Match M on T.Teamid = M.Result=tiematches Group by Teamid,Name Order By Teamid;
+select Teamid,Name,count(Resulttiematches) from Team T LEFT JOIN Match M on T.Teamid = M.Result=tiematches Group by Teamid,Name Order By Teamid
+                                                                                               *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select Teamid,Name,count(Resulttiematches) from Team T LEFT JOIN Match M on T.Teamid = M.Resulttiematches Group by Teamid,Name Order By Teamid;
+select Teamid,Name,count(Resulttiematches) from Team T LEFT JOIN Match M on T.Teamid = M.Resulttiematches Group by Teamid,Name Order By Teamid
+                                                                                       *
+ERROR at line 1:
+ORA-00904: "M"."RESULTTIEMATCHES": invalid identifier
+
+
+SQL> alter table Match add(Teamid varchar(10), FOREIGN KEY (Teamid) REFERENCES Team(Teamid));
+
+Table altered.
+
+SQL> select T,Name AS Teamname, count(*) totaltiematches from Team T JOIN Match M on T.Teamid = M.Teamid where M.Result = 'tie' Group by T.Name;
+select T,Name AS Teamname, count(*) totaltiematches from Team T JOIN Match M on T.Teamid = M.Teamid where M.Result = 'tie' Group by T.Name
+       *
+ERROR at line 1:
+ORA-00904: "T": invalid identifier
+
+
+SQL> select T.Name AS Teamname, count(*) totaltiematches from Team T JOIN Match M on T.Teamid = M.Teamid where M.Result = 'tie' Group by T.Name;
+
+no rows selected
+
+SQL> select Playerid,FNmae AS PlayerName,p.Age,m.Matchid from Player p, match m where p.Playerid in(select Playerid from player where Age<30);
+select Playerid,FNmae AS PlayerName,p.Age,m.Matchid from Player p, match m where p.Playerid in(select Playerid from player where Age<30)
+                *
+ERROR at line 1:
+ORA-00904: "FNMAE": invalid identifier
+
+
+SQL> select p.Playerid,p.FNmae AS playerName,p.Age,m.Matchid from Player p, match m where p.Playerid in(select Playerid from player where Age<30);
+select p.Playerid,p.FNmae AS playerName,p.Age,m.Matchid from Player p, match m where p.Playerid in(select Playerid from player where Age<30)
+                  *
+ERROR at line 1:
+ORA-00904: "P"."FNMAE": invalid identifier
+
+
+SQL> select p.Playerid,p.FName AS playerName,p.Age,m.Matchid from Player p, match m where p.Playerid in(select Playerid from player where Age<30);
+
+PLAYERID   PLAYERNAME                                                AGE
+---------- -------------------------------------------------- ----------
+MATCHID
+----------
+P01        N                                                          22
+M01
+
+P01        N                                                          22
+M02
+
+P01        N                                                          22
+M03
+
+
+PLAYERID   PLAYERNAME                                                AGE
+---------- -------------------------------------------------- ----------
+MATCHID
+----------
+P02        M                                                          22
+M01
+
+P02        M                                                          22
+M02
+
+P02        M                                                          22
+M03
+
+
+PLAYERID   PLAYERNAME                                                AGE
+---------- -------------------------------------------------- ----------
+MATCHID
+----------
+P03        S                                                          24
+M01
+
+P03        S                                                          24
+M02
+
+P03        S                                                          24
+M03
+
+
+9 rows selected.
+
+SQL> commit
+  2
