@@ -1,0 +1,311 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Mon Sep 1 14:05:35 2025
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: system
+Enter password:
+Connected.
+SQL> create user VTU29897 identified by VTU29897;
+
+User created.
+
+SQL> grant create session to VTU29897;
+
+Grant succeeded.
+
+SQL> grant resource to VTU29897;
+
+Grant succeeded.
+
+SQL> grant all privileges to VTU29897;
+
+Grant succeeded.
+
+SQL> disconect
+SP2-0042: unknown command "disconect" - rest of line ignored.
+SQL> disconnect
+Disconnected from Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+SQL> connect
+Enter user-name: VTU29897
+Enter password:
+Connected.
+SQL> create table Match(MatchID varchar(10) PRIMARY KEY,Date DATE NOT NULL,Time TIME NOT NULL,Result varchar(25),GroundID varchar(10),FOREIGN KEY(GroundID)REFERENCES Ground(GroundID));
+create table Match(MatchID varchar(10) PRIMARY KEY,Date DATE NOT NULL,Time TIME NOT NULL,Result varchar(25),GroundID varchar(10),FOREIGN KEY(GroundID)REFERENCES Ground(GroundID))
+                                                   *
+ERROR at line 1:
+ORA-00904: : invalid identifier
+
+
+SQL> CREATE TABLE Match (
+  2      MatchID VARCHAR(10) PRIMARY KEY,
+  3      Date DATE NOT NULL,
+  4      Time TIME NOT NULL,
+  5      Result VARCHAR(255),
+  6      GroundID VARCHAR(10),
+  7      FOREIGN KEY (GroundID) REFERENCES Ground(GroundID)
+  8      MatchID VARCHAR(10) PRIMARY KEY,
+  9      FOREIGN KEY (GroundID) REFERENCES Ground(GroundID);
+    Date DATE NOT NULL,
+    *
+ERROR at line 3:
+ORA-00904: : invalid identifier
+
+
+SQL> cretae table cricket board(BoardID varchar(10) PRIMARY KEY,Name varchar(100) NOT NULL,Adress varchar(25),Contact_no number(10));
+SP2-0734: unknown command beginning "cretae tab..." - rest of line ignored.
+SQL> create table cricket board(BoardID varchar(10) PRIMARY KEY,Name varchar(100) NOT NULL,Adress varchar(25),Contact_no number(10));
+create table cricket board(BoardID varchar(10) PRIMARY KEY,Name varchar(100) NOT NULL,Adress varchar(25),Contact_no number(10))
+                     *
+ERROR at line 1:
+ORA-00922: missing or invalid option
+
+
+SQL> create table cricketboard(BoardID varchar(10) PRIMARY KEY,Name varchar(100) NOT NULL,Adress varchar(25),Contact_no number(10));
+
+Table created.
+
+SQL> create table Team(Teamid varchar(25) PRIMARY KEY,Name varchar
+  2
+SQL> create table Team(Teamid varchar(25) PRIMARY KEY,Name varchar(25),Coach varchar(50),Captain varchar(50));
+
+Table created.
+
+SQL> create table player(playerid varchar(10) PRIMARY KEY,FName varchar(50) NOT NULL,LName varchar(50) NOT NULL,Age int,DateofBirth DATE,playinh role varchar(50),Teamid varchar(10),FOREIGN KEY(Teamid)REFERENCES Team(Teamid));
+create table player(playerid varchar(10) PRIMARY KEY,FName varchar(50) NOT NULL,LName varchar(50) NOT NULL,Age int,DateofBirth DATE,playinh role varchar(50),Teamid varchar(10),FOREIGN KEY(Teamid)REFERENCES Team(Teamid))
+                                                                                                                                                 *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table player(playerid varchar(10) PRIMARY KEY,FName varchar(50) NOT NULL,LName varchar(50) NOT NULL,Age int,DateofBirth DATE,playing role varchar(50),Teamid varchar(10),FOREIGN KEY(Teamid)REFERENCES Team(Teamid));
+create table player(playerid varchar(10) PRIMARY KEY,FName varchar(50) NOT NULL,LName varchar(50) NOT NULL,Age int,DateofBirth DATE,playing role varchar(50),Teamid varchar(10),FOREIGN KEY(Teamid)REFERENCES Team(Teamid))
+                                                                                                                                                 *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table player(playerid varchar(10) PRIMARY KEY,FName varchar(50) NOT NULL,LName varchar(50) NOT NULL,Age int,DateofBirth DATE,playing role varchar(50),Teamid varchar(10),FOREIGN KEY(Teamid) REFERENCES Team(Teamid));
+create table player(playerid varchar(10) PRIMARY KEY,FName varchar(50) NOT NULL,LName varchar(50) NOT NULL,Age int,DateofBirth DATE,playing role varchar(50),Teamid varchar(10),FOREIGN KEY(Teamid) REFERENCES Team(Teamid))
+                                                                                                                                                 *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table player(Playerid varchar(10) PRIMARY KEY,FName varchar(50) NOT NULL,LName varchar(50) NOT NULL,Age int,DateofBirth DATE,Playing role varchar(50),Teamid varchar(10),FOREIGN KEY(Teamid) REFERENCES Team(Teamid));
+create table player(Playerid varchar(10) PRIMARY KEY,FName varchar(50) NOT NULL,LName varchar(50) NOT NULL,Age int,DateofBirth DATE,Playing role varchar(50),Teamid varchar(10),FOREIGN KEY(Teamid) REFERENCES Team(Teamid))
+                                                                                                                                                 *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table player(Playerid varchar(10) PRIMARY KEY,FName varchar(50) NOT NULL,LName varchar(50) NOT NULL,Age int,DateofBirth DATE,Playingrole varchar(50),Teamid varchar(10),FOREIGN KEY(Teamid) REFERENCES Team(Teamid));
+
+Table created.
+
+SQL> create table Ground(Groundid varchar(10) PRIMARY KEY,Name varchar(100) NOT NULL,Location varchar(1000,Capacity int);
+create table Ground(Groundid varchar(10) PRIMARY KEY,Name varchar(100) NOT NULL,Location varchar(1000,Capacity int)
+                                                                                                     *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table Ground(Groundid varchar(10) PRIMARY KEY,Name varchar(100) NOT NULL,Location varchar(100),Capacity int);
+
+Table created.
+
+SQL> create table Match(Matchid varchar(10) PRIMARY KEY,Date DATE NOT NULL,Time TIME NOT NULL,Result varchar(25),Groundid varchar(10),
+  2
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL> create table Match(Matchid varchar(10) PRIMARY KEY,Date DATE NOT NULL,Time TIME NOT NULL,Result varchar(25),Groundid varchar(10),FOREIGN KEY(Groundid) REFERENCES Ground(Grountid));
+create table Match(Matchid varchar(10) PRIMARY KEY,Date DATE NOT NULL,Time TIME NOT NULL,Result varchar(25),Groundid varchar(10),FOREIGN KEY(Groundid) REFERENCES Ground(Grountid))
+                                                   *
+ERROR at line 1:
+ORA-00904: : invalid identifier
+
+
+SQL> create table Match(Matchid varchar(10) PRIMARY KEY,Date DATE NOT NULL,Time TIME NOT NULL,Result varchar(25),Groundid varchar(10)FOREIGN KEY(Groundid) REFERENCES Ground(Grountid));
+create table Match(Matchid varchar(10) PRIMARY KEY,Date DATE NOT NULL,Time TIME NOT NULL,Result varchar(25),Groundid varchar(10)FOREIGN KEY(Groundid) REFERENCES Ground(Grountid))
+                                                   *
+ERROR at line 1:
+ORA-00904: : invalid identifier
+
+
+SQL> create table Match(Matchid varchar(10) PRIMARY KEY,Date DATE NOT NULL,Time TIME NOT NULL,Result varchar(25),Groundid varchar(10) FOREIGN KEY(Groundid) REFERENCES Ground(Grountid));
+create table Match(Matchid varchar(10) PRIMARY KEY,Date DATE NOT NULL,Time TIME NOT NULL,Result varchar(25),Groundid varchar(10) FOREIGN KEY(Groundid) REFERENCES Ground(Grountid))
+                                                   *
+ERROR at line 1:
+ORA-00904: : invalid identifier
+
+
+SQL> create table Match(Matchid varchar(10) PRIMARY KEY,Date TO_DATE NOT NULL,Time TIME NOT NULL,Result varchar(25),Groundid varchar(10) FOREIGN KEY(Groundid) REFERENCES Ground(Grountid));
+create table Match(Matchid varchar(10) PRIMARY KEY,Date TO_DATE NOT NULL,Time TIME NOT NULL,Result varchar(25),Groundid varchar(10) FOREIGN KEY(Groundid) REFERENCES Ground(Grountid))
+                                                   *
+ERROR at line 1:
+ORA-00904: : invalid identifier
+
+
+SQL> create table Match(Matchid varchar(10) PRIMARY KEY,Result varchar(25),Groundid varchar(10) FOREIGN KEY(Groundid) REFERENCES Ground(Grountid));
+create table Match(Matchid varchar(10) PRIMARY KEY,Result varchar(25),Groundid varchar(10) FOREIGN KEY(Groundid) REFERENCES Ground(Grountid))
+                                                                                           *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table Match(Matchid varchar(10) PRIMARY KEY,Result varchar(25),Groundid varchar(10), FOREIGN KEY(Groundid) REFERENCES Ground(Groundid));
+
+Table created.
+
+SQL> cretae table Umpire(Umpireid varchar(10) PRIMARY KEY,FName varchar(50) NOT NULL,LName varchar(50) NOT NULL,Age int,DateofBirth DATE,Country varchar(50));
+SP2-0734: unknown command beginning "cretae tab..." - rest of line ignored.
+SQL> create table Umpire(Umpireid varchar(10) PRIMARY KEY,FName varchar(50) NOT NULL,LName varchar(50) NOT NULL,Age int,DateofBirth DATE,Country varchar(50));
+
+Table created.
+
+SQL> insert into cricketboard values('&BoardID','&Name','&Adress','&Contact_no');
+Enter value for boardid: b1
+Enter value for name: BCCI
+Enter value for adress: Mumbai
+Enter value for contact_no: 9876543210
+old   1: insert into cricketboard values('&BoardID','&Name','&Adress','&Contact_no')
+new   1: insert into cricketboard values('b1','BCCI','Mumbai','9876543210')
+
+1 row created.
+
+SQL> /
+Enter value for boardid: b2
+Enter value for name: ECB
+Enter value for adress: London
+Enter value for contact_no: 9123456780
+old   1: insert into cricketboard values('&BoardID','&Name','&Adress','&Contact_no')
+new   1: insert into cricketboard values('b2','ECB','London','9123456780')
+
+1 row created.
+
+SQL> /
+Enter value for boardid: b3
+Enter value for name: CA
+Enter value for adress: Australia
+Enter value for contact_no: 9988776655
+old   1: insert into cricketboard values('&BoardID','&Name','&Adress','&Contact_no')
+new   1: insert into cricketboard values('b3','CA','Australia','9988776655')
+
+1 row created.
+
+SQL> insert into Team('&Teamid','&Name','&Coach','
+  2  9123456780
+  3  /
+Enter value for teamid: create table player(playerid varchar(10) PRIMARY KEY,FName varchar(50) NOT NULL,LName varchar(50) NOT NULL,Age int,DateofBirth DATE,playing role varchar(50),Teamid varchar(10),FOREIGN KEY(Teamid) REFERENCES Team(Teamid));
+Enter value for name:
+Enter value for coach:
+old   1: insert into Team('&Teamid','&Name','&Coach','
+new   1: insert into Team('create table player(playerid varchar(10) PRIMARY KEY,FName varchar(50) NOT NULL,LName varchar(50) NOT NULL,Age int,DateofBirth DATE,playing role varchar(50),Teamid varchar(10),FOREIGN KEY(Teamid) REFERENCES Team(Teamid));','','','
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> insert into Team values('&Teamid'.'&Name','&Coach','&Captain');
+Enter value for teamid: t1
+Enter value for name: India
+Enter value for coach: Rahul Dravid
+Enter value for captain: Rohit Sharma
+old   1: insert into Team values('&Teamid'.'&Name','&Coach','&Captain')
+new   1: insert into Team values('t1'.'India','Rahul Dravid','Rohit Sharma')
+insert into Team values('t1'.'India','Rahul Dravid','Rohit Sharma')
+                            *
+ERROR at line 1:
+ORA-00917: missing comma
+
+
+SQL> insert into Team values('&Teamid','&Name','&Coach','&Captain');
+Enter value for teamid: t1
+Enter value for name: India
+Enter value for coach: Rahul Dravid
+Enter value for captain: Rohit Sharma
+old   1: insert into Team values('&Teamid','&Name','&Coach','&Captain')
+new   1: insert into Team values('t1','India','Rahul Dravid','Rohit Sharma')
+
+1 row created.
+
+SQL> /
+Enter value for teamid: t2
+Enter value for name: England
+Enter value for coach: Matthew Mott
+Enter value for captain: Jos Buttler
+old   1: insert into Team values('&Teamid','&Name','&Coach','&Captain')
+new   1: insert into Team values('t2','England','Matthew Mott','Jos Buttler')
+
+1 row created.
+
+SQL> /
+Enter value for teamid: t3
+Enter value for name: Australia
+Enter value for coach: Andrew McDonald
+Enter value for captain: Pat Cummins
+old   1: insert into Team values('&Teamid','&Name','&Coach','&Captain')
+new   1: insert into Team values('t3','Australia','Andrew McDonald','Pat Cummins')
+
+1 row created.
+
+SQL> insert into player values('&playerid','&Name','&Age','&DateofBirth','&playingrole','&Teamid');
+Enter value for playerid: p1
+Enter value for name: Virat Kohli
+Enter value for age: 35
+Enter value for dateofbirth: 1988-11-05
+Enter value for playingrole: Right hand Batsman
+Enter value for teamid: t1
+old   1: insert into player values('&playerid','&Name','&Age','&DateofBirth','&playingrole','&Teamid')
+new   1: insert into player values('p1','Virat Kohli','35','1988-11-05','Right hand Batsman','t1')
+insert into player values('p1','Virat Kohli','35','1988-11-05','Right hand Batsman','t1')
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL>
